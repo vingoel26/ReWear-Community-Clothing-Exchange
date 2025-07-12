@@ -7,7 +7,7 @@ export const validateRegister = [
     .isAlphanumeric()
     .withMessage('Username must contain only letters and numbers'),
   
-  body('email')
+  body('email') 
     .isEmail()
     .withMessage('Please enter a valid email address')
     .normalizeEmail(),
