@@ -1,4 +1,4 @@
-jsximport React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Search, Send, MoreVertical, Phone, Video, Users, Wifi, WifiOff, MessageCircle } from 'lucide-react';
 import io from 'socket.io-client'
 const Messages = () => {
