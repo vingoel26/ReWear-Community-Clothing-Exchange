@@ -1,6 +1,6 @@
 import User from '../models/User.js';
 import { validationResult } from 'express-validator';
-import { uploadOnCloudinary } from '../utils/cloudinary.js';
+import { uploadOnCloudinary ,deleteOnCloudinary} from '../utils/cloudinary.js';
 
 // Get all users (Admin only)
 const getAllUsers = async (req, res) => {
@@ -300,6 +300,42 @@ const uploadprofileImage = async (req, res) => {
   }
 };
 
+const updateUserAvatar = async(req, res) => { 
+    const profileImageLocalPath = req.file?.path
+
+    if (!avatarLocalPath) {
+        throw new apierrors(400, "Avatar file is missing")
+    }
+
+    const profileImage = await uploadOnCloudinary(profileImageLocalPath)
+
+    if (!avatar.url) {
+        throw new apierrors(400, "Error while uploading on avatar")
+        
+    }
+
+    const profileImageToDelete = user.profileImage.public_id;
+    
+    const user = await User.findByIdAndUpdate(
+        req.user?._id,
+        {
+            $set:{
+                avatar: avatar.url
+            }
+        },
+        {new: true}
+    ).select("-password")
+
+    if (avatarToDelete && updatedUser.avatar.public_id) {
+        await deleteOnCloudinary(avatarToDelete);
+    }
+
+    return res
+    .status(200)
+    .json(
+        new ApiResponse(200, user, "Profile image updated successfully")
+    )
+}
 
 export {
   getAllUsers,
@@ -308,5 +344,6 @@ export {
   deleteUser,
   toggleUserStatus,
   searchUsers,
-  uploadprofileImage
+  uploadprofileImage,
+  updateUserAvatar
 };
