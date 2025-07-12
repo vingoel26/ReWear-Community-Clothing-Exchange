@@ -1,5 +1,6 @@
 import User from '../models/User.js';
 import { validationResult } from 'express-validator';
+import { uploadOnCloudinary } from '../utils/cloudinary.js';
 
 // Get all users (Admin only)
 const getAllUsers = async (req, res) => {
@@ -260,11 +261,52 @@ const searchUsers = async (req, res) => {
   }
 };
 
+const uploadprofileImage = async (req, res) => {
+  try {
+    // Get the user from DB
+    const user = await User.findById(req.params.id).select('profileImage');
+    if (!user) {
+      return res.status(404).json(new ApiResponse(404, null, "User not found"));
+    }
+
+    // Check if file is present
+    let profileImageLocalPath;
+    if (
+      req.files &&
+      Array.isArray(req.files.profileImage) &&
+      req.files.profileImage.length > 0
+    ) {
+      profileImageLocalPath = req.files.profileImage[0].path;
+    } else {
+      return res.status(400).json(new ApiResponse(400, null, "No profile image uploaded"));
+    }
+
+    // Upload to Cloudinary
+    const profileImageUrl = await uploadOnCloudinary(profileImageLocalPath);
+    if (!profileImageUrl) {
+      return res.status(500).json(new ApiResponse(500, null, "Cloudinary upload failed"));
+    }
+
+    // Update and save user
+    user.profileImage = profileImageUrl;
+    await user.save();
+
+    return res
+      .status(200)
+      .json(new ApiResponse(200, user, "Profile image uploaded successfully"));
+  } catch (error) {
+    console.error("Error uploading profile image:", error);
+    return res.status(500).json(new ApiResponse(500, null, "Internal Server Error"));
+  }
+};
+
+
 export {
   getAllUsers,
   getUserById,
   updateUserProfile,
   deleteUser,
   toggleUserStatus,
-  searchUsers
+  searchUsers,
+  uploadprofileImage
 };
