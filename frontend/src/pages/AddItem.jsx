@@ -1,8 +1,7 @@
-"use client"
 
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { useApp } from "../App"
+import { useApp } from "../contexts/AppContext"
 
 export default function AddItem() {
   const { addItem } = useApp()

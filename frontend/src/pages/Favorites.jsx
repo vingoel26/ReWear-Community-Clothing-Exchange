@@ -1,55 +1,18 @@
-"use client"
 
 import { useState } from "react"
 import { Link } from "react-router-dom"
+import { useApp } from "../contexts/AppContext"
 import { Heart, Grid, List } from "lucide-react"
 
 export default function Favorites() {
+  const { items, favorites, removeFromFavorites } = useApp()
   const [viewMode, setViewMode] = useState("grid")
   const [filterCategory, setFilterCategory] = useState("all")
 
-  // Mock favorite items
-  const favoriteItems = [
-    {
-      id: 1,
-      title: "Vintage Denim Jacket",
-      description: "Classic blue denim jacket in excellent condition.",
-      category: "Outerwear",
-      size: "M",
-      condition: "Excellent",
-      images: ["/placeholder.svg?height=300&width=300"],
-      points: 25,
-      uploaderName: "Sarah Johnson",
-      dateAdded: "2 days ago",
-    },
-    {
-      id: 2,
-      title: "Summer Floral Dress",
-      description: "Beautiful floral print dress, perfect for summer.",
-      category: "Dresses",
-      size: "S",
-      condition: "Good",
-      images: ["/placeholder.svg?height=300&width=300"],
-      points: 20,
-      uploaderName: "Emma Wilson",
-      dateAdded: "1 week ago",
-    },
-    {
-      id: 3,
-      title: "Designer Sneakers",
-      description: "Limited edition sneakers, barely worn.",
-      category: "Shoes",
-      size: "9",
-      condition: "Like New",
-      images: ["/placeholder.svg?height=300&width=300"],
-      points: 35,
-      uploaderName: "Mike Chen",
-      dateAdded: "3 days ago",
-    },
-  ]
-
   const categories = ["all", "Outerwear", "Dresses", "Shoes", "Tops", "Bottoms", "Accessories"]
 
+  // Get favorite items
+  const favoriteItems = items.filter((item) => favorites.includes(item.id))
   const filteredItems = favoriteItems.filter((item) => filterCategory === "all" || item.category === filterCategory)
 
   return (
@@ -123,7 +86,7 @@ export default function Favorites() {
               <div className={viewMode === "list" ? "w-32 h-32 flex-shrink-0" : "aspect-square"}>
                 <Link to={`/item/${item.id}`}>
                   <img
-                    src={item.images[0] || "/placeholder.svg"}
+                    src={item.images[0] || "/placeholder.svg?height=300&width=300"}
                     alt={item.title}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />
@@ -138,7 +101,10 @@ export default function Favorites() {
                       {item.title}
                     </h3>
                   </Link>
-                  <button className="text-red-500 hover:text-red-600 transition-colors duration-200">
+                  <button
+                    onClick={() => removeFromFavorites(item.id)}
+                    className="text-red-500 hover:text-red-600 transition-colors duration-200"
+                  >
                     <Heart className="w-5 h-5 fill-current" />
                   </button>
                 </div>
@@ -155,7 +121,6 @@ export default function Favorites() {
                     <span className="text-green-600 dark:text-green-400 font-semibold">{item.points} points</span>
                     <span className="text-xs text-gray-500 dark:text-gray-400">by {item.uploaderName}</span>
                   </div>
-                  <span className="text-xs text-gray-400 dark:text-gray-500">Added {item.dateAdded}</span>
                 </div>
 
                 {viewMode === "list" && (
@@ -166,7 +131,10 @@ export default function Favorites() {
                     >
                       View Details
                     </Link>
-                    <button className="px-4 py-2 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-md hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors duration-200 text-sm">
+                    <button
+                      onClick={() => removeFromFavorites(item.id)}
+                      className="px-4 py-2 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-md hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors duration-200 text-sm"
+                    >
                       Remove
                     </button>
                   </div>

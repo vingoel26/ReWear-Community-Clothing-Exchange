@@ -2,8 +2,8 @@ import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import dotenv from 'dotenv';
-// import authRoutes from './routes/authRoutes.js';
-// import userRoutes from './routes/userRoutes.js';
+import authRoutes from './Routes/authRoute.js';
+import userRoutes from './Routes/userRoute.js';
 import connectDB from './db/index.js';
 
 dotenv.config();
@@ -34,5 +34,5 @@ connectDB()
 
 
 
-// app.use('/api/auth', authRoutes);
-// app.use('/api/users', userRoutes);
+app.use('/api/auth', authRoutes);
+app.use('/api/users', userRoutes);
