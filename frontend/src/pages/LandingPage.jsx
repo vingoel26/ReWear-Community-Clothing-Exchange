@@ -71,7 +71,7 @@ export default function LandingPage() {
   ]
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-green-500 via-blue-500 to-purple-600 text-white py-20 overflow-hidden">
         {/* Animated background elements */}

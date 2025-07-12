@@ -1,4 +1,4 @@
-
+ 
 import { useApp } from "../contexts/AppContext"
 import { Link } from "react-router-dom"
 import { useState } from "react"
@@ -70,7 +70,7 @@ export default function Dashboard() {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 h-full min-h-screen flex flex-col">
         {/* Header */}
         <div className="mb-8">
           <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between">
@@ -83,12 +83,19 @@ export default function Dashboard() {
               </p>
             </div>
             <div className="mt-4 lg:mt-0 flex items-center space-x-3">
-              <select value={timeRange} onChange={(e) => setTimeRange(e.target.value)} className="form-select text-sm">
+              <select
+                value={timeRange}
+                onChange={(e) => setTimeRange(e.target.value)}
+                className="h-12 px-4 rounded-lg border border-gray-300 dark:border-gray-700 bg-gray-900 text-white dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-green-500 text-base"
+              >
                 <option value="week">This Week</option>
                 <option value="month">This Month</option>
                 <option value="year">This Year</option>
               </select>
-              <Link to="/add-item" className="btn-primary flex items-center space-x-2">
+              <Link
+                to="/add-item"
+                className="h-12 px-6 rounded-lg flex items-center space-x-2 bg-gradient-to-r from-green-500 to-green-700 text-white font-semibold shadow transition hover:from-green-600 hover:to-green-800 focus:outline-none focus:ring-2 focus:ring-green-500"
+              >
                 <Plus className="w-4 h-4" />
                 <span>List Item</span>
               </Link>
@@ -125,9 +132,9 @@ export default function Dashboard() {
           })}
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 min-h-screen w-full">
           {/* Recent Listings */}
-          <div className="lg:col-span-2">
+          <div className="lg:col-span-2 flex flex-col flex-1">
             <div className="bg-white dark:bg-gray-800 rounded-xl shadow-soft border border-gray-200 dark:border-gray-700 p-6">
               <div className="flex items-center justify-between mb-6">
                 <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100">Your Recent Listings</h2>
@@ -205,7 +212,7 @@ export default function Dashboard() {
           </div>
 
           {/* Sidebar */}
-          <div className="space-y-6">
+          <div className="space-y-6 self-stretch">
             {/* Quick Actions */}
             <div className="bg-white dark:bg-gray-800 rounded-xl shadow-soft border border-gray-200 dark:border-gray-700 p-6">
               <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-4">Quick Actions</h3>
