@@ -1,1 +1,84 @@
 @import "tailwindcss";
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Smooth Transitions */
+button,
+a,
+input[type="submit"] {
+  transition: all 0.3s ease-in-out;
+}
+
+/* Hover Effects and Micro-Interactions */
+button:hover,
+a:hover,
+input[type="submit"]:hover {
+  opacity: 0.8;
+  transform: scale(1.05);
+}
+
+/* Dark Mode Styles */
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #121212;
+    color: #ffffff;
+  }
+
+  .dark-mode-element {
+    background-color: #333333;
+    color: #eeeeee;
+  }
+}
+
+/* Loading Animations */
+.loading-spinner {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-left-color: #3498db;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin: 20px auto;
+}
+
+/* Responsive Design Improvements */
+@media (max-width: 768px) {
+  .responsive-element {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}
+
+@media (min-width: 769px) {
+  .responsive-element {
+    width: 50%;
+    display: inline-block;
+  }
+}

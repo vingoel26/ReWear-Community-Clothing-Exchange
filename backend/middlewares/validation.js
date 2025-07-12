@@ -1,6 +1,5 @@
 import { body } from 'express-validator';
 
-// Registration validation
 export const validateRegister = [
   body('username')
     .isLength({ min: 3, max: 20 })
@@ -30,7 +29,6 @@ export const validateRegister = [
     .trim()
 ];
 
-// Login validation
 export const validateLogin = [
   body('email')
     .isEmail()
@@ -42,7 +40,6 @@ export const validateLogin = [
     .withMessage('Password is required')
 ];
 
-// Change password validation
 export const validateChangePassword = [
   body('currentPassword')
     .notEmpty()
@@ -55,7 +52,6 @@ export const validateChangePassword = [
     .withMessage('New password must contain at least one uppercase letter, one lowercase letter, and one number')
 ];
 
-// Update profile validation
 export const validateUpdateProfile = [
   body('firstName')
     .optional()

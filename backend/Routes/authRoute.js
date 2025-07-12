@@ -14,11 +14,11 @@ import {
 
 const router = express.Router();
 
-// Public routes
 router.post('/register', validateRegister, register);
 router.post('/login', validateLogin, login);
 
-// Protected routes
+
+//admins or change
 router.get('/me', protect, getCurrentUser);
 router.put('/change-password', protect, validateChangePassword, changePassword);
 
