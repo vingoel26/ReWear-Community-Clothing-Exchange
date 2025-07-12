@@ -96,34 +96,6 @@ export default function Header() {
             </Link>
           </div>
 
-          {/* Center - Search (hidden on mobile) */}
-          <div className="hidden md:flex flex-1 max-w-lg mx-8">
-            <form onSubmit={handleSearch} className="w-full relative">
-              <div className="relative">
-                <input
-                  type="text"
-                  placeholder="Search items, brands, or tags..."
-                  value={localSearchQuery}
-                  onChange={(e) => setLocalSearchQuery(e.target.value)}
-                  className="w-full pl-12 pr-4 py-3 bg-gray-100 dark:bg-gray-800 border-0 rounded-full text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-green-500 focus:bg-white dark:focus:bg-gray-700 transition-all duration-200 shadow-sm"
-                />
-                <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-                {localSearchQuery && (
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setLocalSearchQuery("")
-                      setSearchQuery("")
-                    }}
-                    className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
-                  >
-                    <X className="w-4 h-4" />
-                  </button>
-                )}
-              </div>
-            </form>
-          </div>
-
           {/* Right side */}
           <div className="flex items-center space-x-2">
             {/* Navigation Links */}
@@ -312,32 +284,6 @@ export default function Header() {
             )}
           </div>
         </div>
-      </div>
-
-      {/* Mobile search bar */}
-      <div className="md:hidden px-4 pb-4">
-        <form onSubmit={handleSearch} className="relative">
-          <input
-            type="text"
-            placeholder="Search items..."
-            value={localSearchQuery}
-            onChange={(e) => setLocalSearchQuery(e.target.value)}
-            className="w-full pl-12 pr-10 py-3 bg-gray-100 dark:bg-gray-800 border-0 rounded-full text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-green-500 transition-all duration-200"
-          />
-          <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-          {localSearchQuery && (
-            <button
-              type="button"
-              onClick={() => {
-                setLocalSearchQuery("")
-                setSearchQuery("")
-              }}
-              className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
-            >
-              <X className="w-4 h-4" />
-            </button>
-          )}
-        </form>
       </div>
     </header>
   )

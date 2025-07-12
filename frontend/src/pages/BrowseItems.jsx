@@ -184,7 +184,6 @@ export default function BrowseItems() {
                     onChange={(e) => setLocalSearchQuery(e.target.value)}
                     className="form-input pl-12 pr-12"
                   />
-                  <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
                   {localSearchQuery && (
                     <button
                       type="button"
