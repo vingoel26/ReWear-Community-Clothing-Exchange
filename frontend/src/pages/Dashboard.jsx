@@ -209,6 +209,44 @@ export default function Dashboard() {
                 </div>
               )}
             </div>
+            {/* Recent Favorites (moved here) */}
+            {recentFavorites.length > 0 && (
+              <div className="mt-8">
+                <div className="bg-white dark:bg-gray-800 rounded-xl shadow-soft border border-gray-200 dark:border-gray-700 p-6">
+                  <div className="flex items-center justify-between mb-6">
+                    <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100">Recent Favorites</h2>
+                    <Link
+                      to="/favorites"
+                      className="text-green-600 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300 font-medium text-sm flex items-center"
+                    >
+                      View all
+                      <ArrowUpRight className="w-4 h-4 ml-1" />
+                    </Link>
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    {recentFavorites.map((item) => (
+                      <Link
+                        key={item.id}
+                        to={`/item/${item.id}`}
+                        className="group bg-gray-50 dark:bg-gray-700 rounded-lg overflow-hidden hover:shadow-lg transition-all duration-200 card-hover"
+                      >
+                        <img
+                          src={item.images[0] || "/placeholder.svg?height=150&width=150"}
+                          alt={item.title}
+                          className="w-full h-32 object-cover group-hover:scale-105 transition-transform duration-300"
+                        />
+                        <div className="p-3">
+                          <h3 className="font-semibold text-gray-900 dark:text-gray-100 text-sm truncate group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors duration-200">
+                            {item.title}
+                          </h3>
+                          <p className="text-green-600 dark:text-green-400 font-bold text-sm mt-1">{item.points} pts</p>
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Sidebar */}
@@ -303,46 +341,6 @@ export default function Dashboard() {
             </div>
           </div>
         </div>
-
-        {/* Recent Favorites */}
-        {recentFavorites.length > 0 && (
-          <div className="mt-8">
-            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-soft border border-gray-200 dark:border-gray-700 p-6">
-              <div className="flex items-center justify-between mb-6">
-                <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100">Recent Favorites</h2>
-                <Link
-                  to="/favorites"
-                  className="text-green-600 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300 font-medium text-sm flex items-center"
-                >
-                  View all
-                  <ArrowUpRight className="w-4 h-4 ml-1" />
-                </Link>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                {recentFavorites.map((item) => (
-                  <Link
-                    key={item.id}
-                    to={`/item/${item.id}`}
-                    className="group bg-gray-50 dark:bg-gray-700 rounded-lg overflow-hidden hover:shadow-lg transition-all duration-200 card-hover"
-                  >
-                    <img
-                      src={item.images[0] || "/placeholder.svg?height=150&width=150"}
-                      alt={item.title}
-                      className="w-full h-32 object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                    <div className="p-3">
-                      <h3 className="font-semibold text-gray-900 dark:text-gray-100 text-sm truncate group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors duration-200">
-                        {item.title}
-                      </h3>
-                      <p className="text-green-600 dark:text-green-400 font-bold text-sm mt-1">{item.points} pts</p>
-                    </div>
-                  </Link>
-                ))}
-              </div>
-            </div>
-          </div>
-        )}
       </div>
     </div>
   )
