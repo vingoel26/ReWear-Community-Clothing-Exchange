@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Search, Send, MoreVertical, Phone, Video, Users, Wifi, WifiOff, MessageCircle } from 'lucide-react';
-
-const ChatApp = () => {
+import io from 'socket.io-client'
+const Messages = () => {
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState('');
   const [username, setUsername] = useState('');
@@ -29,7 +29,6 @@ const ChatApp = () => {
   // Initialize socket connection
   useEffect(() => {
     if (isConnected && username) {
-      const io = require('socket.io-client');
       const newSocket = io('http://localhost:3001');
 
       newSocket.on('connect', () => {
@@ -467,4 +466,4 @@ const ChatApp = () => {
   );
 };
 
-export default ChatApp;
+export default Messages;
