@@ -362,6 +362,50 @@ const getUserItems = async (req, res) => {
   }
 };
 
+const uploadItemImages = async (req, res) => {
+  try {
+    const item = await Item.findById(req.params.id);
+
+    if (!item) {
+      return res.status(404).json(new ApiResponse(404, null, 'Item not found'));
+    }
+
+    if (item.owner.toString() !== req.user.userId) {
+      return res.status(403).json(new ApiResponse(403, null, 'Not authorized'));
+    }
+
+    const files = req.files?.itemImages || [];
+
+    // ❌ If no new images AND no existing images => reject
+    if (files.length === 0 && item.images.length === 0) {
+      return res.status(400).json(
+        new ApiResponse(400, null, 'At least one image is required')
+      );
+    }
+
+    // ✅ Upload any newly uploaded images
+    const uploadResults = await Promise.all(
+      files.map(file => uploadOnCloudinary(file.path))
+    );
+
+    const validUrls = uploadResults.filter(Boolean);
+    if (validUrls.length > 0) {
+      item.images.push(...validUrls); // Add new ones
+    }
+
+    await item.save();
+
+    return res
+      .status(200)
+      .json(new ApiResponse(200, item, 'Images uploaded successfully'));
+  } catch (error) {
+    console.error('Upload item images error:', error);
+    return res.status(500).json(new ApiResponse(500, null, 'Server error'));
+  }
+};
+
+
+
 export {
   createItem,
   getAllItems,
