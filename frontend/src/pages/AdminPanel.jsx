@@ -1,7 +1,6 @@
-"use client"
 
 import { useState } from "react"
-import { useApp } from "../App"
+import { useApp } from "../contexts/AppContext"
 
 export default function AdminPanel() {
   const { items, users, updateItemStatus, setUsers } = useApp()

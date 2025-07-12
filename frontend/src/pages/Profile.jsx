@@ -1,7 +1,6 @@
-"use client"
 
 import { useState } from "react"
-import { useApp } from "../App"
+import { useApp } from "../contexts/AppContext"
 import { Camera, Edit, Save, X, MapPin, Calendar, Award } from "lucide-react"
 
 export default function Profile() {
