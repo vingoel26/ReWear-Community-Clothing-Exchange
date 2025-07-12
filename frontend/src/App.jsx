@@ -110,6 +110,7 @@ import AdminPanel from "./pages/AdminPanel"
 import Profile from "./pages/Profile"
 import Messages from "./pages/Messages"
 import Favorites from "./pages/Favorites"
+import ChatApp from "./components/ChatModal"
 
 function AppContent() {
   const { currentUser, sidebarOpen } = useApp()
@@ -194,6 +195,7 @@ function AppContent() {
         <NotificationToast />
       </div>
     </Router>
+    // <ChatApp/>
   )
 }
 

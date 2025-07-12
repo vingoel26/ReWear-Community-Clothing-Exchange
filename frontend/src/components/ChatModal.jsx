@@ -1,4 +1,4 @@
-jsximport React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Search, Send, MoreVertical, Phone, Video, Users, Wifi, WifiOff, MessageCircle } from 'lucide-react';
 import io from 'socket.io-client'
 const Messages = () => {
@@ -278,7 +278,6 @@ const Messages = () => {
   }
 
   return (
-
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 p-4">
       <div className="max-w-7xl mx-auto">
         <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden h-[calc(100vh-2rem)]">
@@ -351,7 +350,6 @@ const Messages = () => {
                   </div>
                 ))}
               </div>
-
             </div>
 
             {/* Chat Area */}
@@ -370,7 +368,6 @@ const Messages = () => {
                   <div className="relative">
                     <div className="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
                       <span className="text-white font-semibold">G</span>
-
                     </div>
                     <div className="absolute -bottom-1 -right-1 w-3 h-3 bg-green-500 border-2 border-white rounded-full"></div>
                   </div>
@@ -461,7 +458,6 @@ const Messages = () => {
                   </button>
                 </div>
               </div>
-
             </div>
           </div>
         </div>
